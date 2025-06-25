@@ -3,7 +3,6 @@
 package dev.dani.lumina.api.tablist
 
 import dev.dani.lumina.api.animation.Animated
-import dev.dani.lumina.api.profile.Profile
 
 
 /*

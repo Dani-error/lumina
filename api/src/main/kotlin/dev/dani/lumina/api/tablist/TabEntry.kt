@@ -30,6 +30,7 @@ data class RuntimeTabEntry(val column: TabColumn, val slot: Int, val profile: Pr
     var lastSkin: Profile.Resolved? = null
 }
 
+@Suppress("unused")
 class DynamicEntryBuilder {
     var column: TabColumn = TabColumn.MIDDLE
     var slot: Int = 0
@@ -66,6 +67,7 @@ class DynamicEntryBuilder {
 }
 
 
+@Suppress("unused")
 class EntryListBuilder(private val entries: MutableList<TabEntry>) {
     fun entry(block: DynamicEntryBuilder.() -> Unit) {
         val builder = DynamicEntryBuilder().apply(block)
@@ -74,6 +76,7 @@ class EntryListBuilder(private val entries: MutableList<TabEntry>) {
 }
 
 
+@Suppress("unused")
 class EntryConfig {
     var ping: TabPing = Animated.Static(0)
     var skin: TabSkin = Animated.Static(DEFAULT_SKIN)

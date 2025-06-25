@@ -25,11 +25,11 @@ abstract class CommonPlatform<P, E>(
     override val scoreboardHandler: ScoreboardHandler<P>
 ): Platform<P, E> {
 
-    val tablistEventHandler: CommonTabEventHandler<P, E> by lazy {
+    private val tablistEventHandler: CommonTabEventHandler<P, E> by lazy {
         CommonTabEventHandler(this)
     }
 
-    val scoreboardEventHandler: CommonScoreboardEventHandler<P, E> by lazy {
+    private val scoreboardEventHandler: CommonScoreboardEventHandler<P, E> by lazy {
         CommonScoreboardEventHandler(this)
     }
 
@@ -40,6 +40,16 @@ abstract class CommonPlatform<P, E>(
     private fun init() {
         // register the packet listeners
         this.packetFactory.initialize(this)
+    }
+
+    fun onJoin(player: P) {
+        scoreboardEventHandler.onJoin(player)
+        tablistEventHandler.onJoin(player)
+    }
+
+    fun onQuit(player: P) {
+        scoreboardEventHandler.onQuit(player)
+        tablistEventHandler.onQuit(player)
     }
 
 }

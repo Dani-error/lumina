@@ -13,7 +13,7 @@ object ClassHelper {
             val classLoader = ClassHelper::class.java.classLoader
             Class.forName(className, false, classLoader)
             return true
-        } catch (exception: ClassNotFoundException) {
+        } catch (_: ClassNotFoundException) {
             return false
         }
     }

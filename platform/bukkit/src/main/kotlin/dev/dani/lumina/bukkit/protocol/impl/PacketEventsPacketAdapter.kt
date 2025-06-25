@@ -29,14 +29,11 @@ import dev.dani.lumina.api.tablist.RuntimeTabEntry
 import dev.dani.lumina.api.tablist.definition.TabLatency
 import io.github.retrooper.packetevents.factory.spigot.SpigotPacketEventsBuilder
 import org.bukkit.Bukkit
-import org.bukkit.World
 import org.bukkit.entity.Player
-import org.bukkit.inventory.ItemStack
 import org.bukkit.plugin.Plugin
-import org.bukkit.scoreboard.RenderType
 import org.bukkit.scoreboard.Scoreboard
 import org.bukkit.scoreboard.Team
-import java.util.Optional
+import java.util.*
 
 
 /*
@@ -84,7 +81,7 @@ object PacketEventsPacketAdapter : PlatformPacketAdapter<Player, Plugin> {
                     )
                 } else {
                     WrapperPlayServerPlayerInfo(
-                        WrapperPlayServerPlayerInfo.Action.UPDATE_LATENCY,
+                        Action.UPDATE_LATENCY,
                         entry.map { PlayerData(null, convertProfile(it.profile), GameMode.SURVIVAL, it.lastPing ?: TabLatency.FIVE_BARS.value) }
                     )
                 }
@@ -107,7 +104,7 @@ object PacketEventsPacketAdapter : PlatformPacketAdapter<Player, Plugin> {
                         ) }
                     )
                 } else {
-                    WrapperPlayServerPlayerInfo(WrapperPlayServerPlayerInfo.Action.UPDATE_DISPLAY_NAME, entry.map {
+                    WrapperPlayServerPlayerInfo(Action.UPDATE_DISPLAY_NAME, entry.map {
                         PlayerData(
                             AdventureSerializer.fromLegacyFormat(it.displayName),
                             convertProfile(it.profile),
@@ -145,7 +142,7 @@ object PacketEventsPacketAdapter : PlatformPacketAdapter<Player, Plugin> {
                         GameMode.SURVIVAL,
                         0) }
 
-                    packetPlayerManager!!.sendPacket(player, WrapperPlayServerPlayerInfo(WrapperPlayServerPlayerInfo.Action.ADD_PLAYER, dataList ))
+                    packetPlayerManager!!.sendPacket(player, WrapperPlayServerPlayerInfo(Action.ADD_PLAYER, dataList ))
                 }
             }
 
@@ -158,7 +155,7 @@ object PacketEventsPacketAdapter : PlatformPacketAdapter<Player, Plugin> {
                     WrapperPlayServerPlayerInfoRemove(entry.map { it.profile.uniqueId })
                 } else {
                     WrapperPlayServerPlayerInfo(
-                        WrapperPlayServerPlayerInfo.Action.REMOVE_PLAYER,
+                        Action.REMOVE_PLAYER,
                         entry.map {
                             PlayerData(null, convertProfile(it.profile), GameMode.SURVIVAL, it.lastPing ?: 0)
                         }
@@ -196,7 +193,7 @@ object PacketEventsPacketAdapter : PlatformPacketAdapter<Player, Plugin> {
                     }
                 } else {
                     val playerInfoAdd =
-                        WrapperPlayServerPlayerInfo(WrapperPlayServerPlayerInfo.Action.ADD_PLAYER, entry.map {
+                        WrapperPlayServerPlayerInfo(Action.ADD_PLAYER, entry.map {
                             PlayerData(
                                 if (!legacy) AdventureSerializer.fromLegacyFormat(it.displayName) else null,
                                 convertProfile(it.profile.withProperties((it.lastSkin ?: it.profile).properties ?: setOf())),
@@ -359,7 +356,7 @@ object PacketEventsPacketAdapter : PlatformPacketAdapter<Player, Plugin> {
             } else if (event.packetType === PacketType.Play.Server.PLAYER_INFO) {
                 val infoPacket = WrapperPlayServerPlayerInfo(event)
                 val action = infoPacket.action
-                if (action != WrapperPlayServerPlayerInfo.Action.ADD_PLAYER) return
+                if (action != Action.ADD_PLAYER) return
 
                 for (data in infoPacket.playerDataList) {
                     val userProfile = data.userProfile ?: continue

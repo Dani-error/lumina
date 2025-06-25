@@ -1,8 +1,6 @@
 package dev.dani.lumina.bukkit
 
-import dev.dani.lumina.api.tablist.TabLayout
 import dev.dani.lumina.common.platform.CommonPlatform
-import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
@@ -20,15 +18,11 @@ import org.bukkit.plugin.Plugin
 class BukkitListener(private val platform: CommonPlatform<Player, Plugin>) : Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
-    fun onJoin(event: PlayerJoinEvent) {
-        platform.scoreboardEventHandler.onJoin(event.player)
-        platform.tablistEventHandler.onJoin(event.player)
-    }
+    fun onJoin(event: PlayerJoinEvent) =
+        platform.onJoin(event.player)
 
     @EventHandler(priority = EventPriority.LOWEST)
-    fun onQuit(event: PlayerQuitEvent) {
-        platform.tablistEventHandler.onQuit(event.player)
-        platform.scoreboardEventHandler.onQuit(event.player)
-    }
+    fun onQuit(event: PlayerQuitEvent) =
+        platform.onQuit(event.player)
 
 }

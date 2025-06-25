@@ -12,7 +12,7 @@ import dev.dani.lumina.api.util.wrap
 import java.io.InputStreamReader
 import java.lang.reflect.Type
 import java.net.HttpURLConnection
-import java.net.URL
+import java.net.URI
 import java.nio.charset.StandardCharsets
 import java.util.*
 import java.util.concurrent.CompletableFuture
@@ -95,7 +95,7 @@ internal object ProfileResolverMojang : ProfileResolver {
     }
 
     private fun createBaseConnection(endpoint: String): HttpURLConnection {
-        return (URL(endpoint).openConnection() as HttpURLConnection).apply {
+        return (URI(endpoint).toURL().openConnection() as HttpURLConnection).apply {
             requestMethod = "GET"
             setRequestProperty("Connection", "close")
             setRequestProperty("Accept", "application/json")

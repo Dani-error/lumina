@@ -30,7 +30,7 @@ import org.bukkit.plugin.Plugin
  */
 class BukkitPlatform : CommonPlatformBuilder<Player, Plugin>() {
 
-    private val FOLIA: Boolean = classExists("io.papermc.paper.threadedregions.RegionizedServerInitEvent")
+    private val usingFolia: Boolean = classExists("io.papermc.paper.threadedregions.RegionizedServerInitEvent")
 
     override fun prepareBuild() {
         // set the profile resolver to a native platform one if not given
@@ -40,7 +40,7 @@ class BukkitPlatform : CommonPlatformBuilder<Player, Plugin>() {
 
         // set the default task manager
         if (this.taskManager == null) {
-            if (FOLIA) {
+            if (usingFolia) {
                 this.taskManager = AsyncPlatformTaskManager.taskManager(extension!!.name)
             } else {
                 this.taskManager = BukkitPlatformTaskManager.taskManager(extension!!)
@@ -84,7 +84,7 @@ class BukkitPlatform : CommonPlatformBuilder<Player, Plugin>() {
 
 
         // build the platform
-        return PlatformBridge(
+        return BukkitPlatformBridge(
             this.debug,
             this.extension!!,
             logger!!,
@@ -104,10 +104,10 @@ class BukkitPlatform : CommonPlatformBuilder<Player, Plugin>() {
     }
 }
 
-internal class PlatformBridge(debug: Boolean, extension: Plugin, logger: PlatformLogger,
-                              profileResolver: ProfileResolver, packetFactory: PlatformPacketAdapter<Player, Plugin>,
-                              versionAccessor: PlatformVersionAccessor, taskManager: PlatformTaskManager, tablistHandler: TabListHandler<Player>,
-                              scoreboardHandler: ScoreboardHandler<Player>
+internal class BukkitPlatformBridge(debug: Boolean, extension: Plugin, logger: PlatformLogger,
+                                    profileResolver: ProfileResolver, packetFactory: PlatformPacketAdapter<Player, Plugin>,
+                                    versionAccessor: PlatformVersionAccessor, taskManager: PlatformTaskManager, tablistHandler: TabListHandler<Player>,
+                                    scoreboardHandler: ScoreboardHandler<Player>
 ) : CommonPlatform<Player, Plugin>(debug, extension, logger, profileResolver, packetFactory, taskManager, versionAccessor,
     tablistHandler, scoreboardHandler
 ) {

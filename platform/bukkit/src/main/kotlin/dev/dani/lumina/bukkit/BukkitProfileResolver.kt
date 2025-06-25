@@ -76,13 +76,12 @@ object BukkitProfileResolver {
         private val convertNullToNilValues = nullToNilConversationNecessary()
 
 
-        @Suppress("UNUSED_VARIABLE")
         private fun nullToNilConversationNecessary(): Boolean {
             try {
                 val dummy = Bukkit.createPlayerProfile(UUID.randomUUID(), "dummy")
-                val ignored: Method = dummy.javaClass.getDeclaredMethod("buildResolvableProfile")
+                dummy.javaClass.getDeclaredMethod("buildResolvableProfile")
                 return true
-            } catch (exception: NoSuchMethodException) {
+            } catch (_: NoSuchMethodException) {
                 return false
             }
         }

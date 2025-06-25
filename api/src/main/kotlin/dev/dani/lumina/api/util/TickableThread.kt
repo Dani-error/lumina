@@ -35,7 +35,7 @@ abstract class TickableThread(module: String, private val disabled: () -> Boolea
 
             try {
                 sleep(updateTicks * 50L)
-            } catch (e: InterruptedException) {
+            } catch (_: InterruptedException) {
                 //
             }
         }

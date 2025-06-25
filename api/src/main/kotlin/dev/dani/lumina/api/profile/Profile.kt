@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package dev.dani.lumina.api.profile
 
 import dev.dani.lumina.api.util.safeEquals

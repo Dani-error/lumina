@@ -10,7 +10,7 @@ import java.util.regex.Pattern
  */
 object ColorUtil {
     const val COLOR_CHAR = '§'
-    private val VALID_CODES = "0123456789AaBbCcDdEeFfKkLlMmNnOoRrXx"
+    private const val VALID_CODES = "0123456789AaBbCcDdEeFfKkLlMmNnOoRrXx"
     private val hexPattern = Pattern.compile("&#[A-Fa-f0-9]{6}")
 
     fun translateAlternateColorCodes(altColorChar: Char = '&', text: String): String {
@@ -36,8 +36,8 @@ object ColorUtil {
                     val parsedColor = fromHex(hexColor)
 
                     if (parsedColor != null)
-                        text = text.replace(color, parsedColor.toString())
-                } catch (ignored: Exception) {
+                        text = text.replace(color, parsedColor)
+                } catch (_: Exception) {
                     // Errors about unknown group, can be safely ignored!
                 }
             }
@@ -104,10 +104,6 @@ object ColorUtil {
         }
 
         return null
-    }
-
-    private fun Char.isHexDigit(): Boolean {
-        return this in '0'..'9' || this in 'a'..'f' || this in 'A'..'F'
     }
 
 }

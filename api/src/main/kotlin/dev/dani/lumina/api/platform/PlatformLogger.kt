@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package dev.dani.lumina.api.platform
 
 import java.util.logging.Level

@@ -1,9 +1,9 @@
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
-import com.vanniktech.maven.publish.SonatypeHost
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.lang.Integer.parseInt
 
 plugins {
-    kotlin("jvm") version "2.1.21" apply false
+    kotlin("jvm") version "2.2.0" apply false
     id("com.vanniktech.maven.publish") version "0.33.0"
 }
 
@@ -29,9 +29,9 @@ subprojects {
         apply(plugin = "com.vanniktech.maven.publish")
     }
 
-    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-        kotlinOptions {
-            jvmTarget = javaVersion
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.fromTarget(javaVersion))
         }
     }
 
@@ -46,7 +46,7 @@ subprojects {
 
     if (project.name != "platform") {
         extensions.configure<MavenPublishBaseExtension> {
-            publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+            publishToMavenCentral()
             signAllPublications()
 
             publishing {

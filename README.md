@@ -8,7 +8,7 @@
 
 ## Features
 
-- **Supports Bukkit & forks** (incl. Folia) via **ProtocolLib** or **PacketEvents**
+- **Supports Bukkit & forks** (incl. Folia) via **PacketEvents**
 - **Fake skin & ping** support
 - **Client support**: 1.7.10+ | **Server**: 1.8+
 - **Character limit**: 48 (≤ 1.12)
@@ -82,7 +82,6 @@ You may need to add the following if you rely on transitive dependencies:
 
 To avoid conflicts when multiple plugins ship the same dependencies, shade/relocate these packages:
 - `io.papermc.lib`
-- `io.leangen.geantyref`
 - `io.github.retrooper`
 - `com.github.retrooper`
 - `dev.dani.lumina`

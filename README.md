@@ -82,7 +82,6 @@ You may need to add the following if you rely on transitive dependencies:
 
 To avoid conflicts when multiple plugins ship the same dependencies, shade/relocate these packages:
 - `io.papermc.lib`
-- `io.leangen.geantyref`
 - `io.github.retrooper`
 - `com.github.retrooper`
 - `dev.dani.lumina`

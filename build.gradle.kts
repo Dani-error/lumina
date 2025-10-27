@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.lang.Integer.parseInt
 
 plugins {
-    kotlin("jvm") version "2.2.0" apply false
+    kotlin("jvm") version "2.2.21" apply false
     id("com.vanniktech.maven.publish") version "0.33.0"
 }
 

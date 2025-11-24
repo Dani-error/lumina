@@ -4,7 +4,7 @@ import java.lang.Integer.parseInt
 
 plugins {
     kotlin("jvm") version "2.2.0" apply false
-    id("com.vanniktech.maven.publish") version "0.33.0"
+    id("com.vanniktech.maven.publish") version "0.35.0"
 }
 
 defaultTasks("clean", "build")
